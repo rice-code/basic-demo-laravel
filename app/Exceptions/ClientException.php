@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Rice\Basic\components\Exception\BaseException;
+use Rice\Basic\Components\Exception\BaseException;
 
 class ClientException extends BaseException
 {

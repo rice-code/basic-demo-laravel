@@ -2,7 +2,7 @@
 
 namespace App\Domain\auth\DouYin;
 
-use Rice\Basic\components\Enum\BaseEnum;
+use Rice\Basic\Components\Enum\BaseEnum;
 
 class DouYinEnum extends BaseEnum
 {

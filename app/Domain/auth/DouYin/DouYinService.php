@@ -3,6 +3,7 @@
 namespace App\Domain\auth\DouYin;
 
 use App\Domain\auth\Token;
+use App\Domain\auth\CallBackDTO;
 use App\Exceptions\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -33,5 +34,20 @@ class DouYinService
     protected function refreshToken($refreshToken): array
     {
         return DouYinClient::build()->refreshToken($refreshToken);
+    }
+
+    /**
+     * oath2回调地址
+     * @param CallBackDTO $dto
+     * @return void
+     */
+    public function callback(CallBackDTO $dto): array
+    {
+        // 数据入库
+
+        return [
+            'state'     => $dto->getState(),
+            'auth_code' => $dto->getAuthCode(),
+        ];
     }
 }

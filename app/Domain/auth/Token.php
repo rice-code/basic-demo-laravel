@@ -2,7 +2,7 @@
 
 namespace App\Domain\auth;
 
-use Rice\Basic\Entity\BaseEntity;
+use Rice\Basic\Components\Entity\BaseEntity;
 use Rice\Basic\Support\Traits\AutoFillProperties;
 
 /**
