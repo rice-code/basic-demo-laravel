@@ -44,7 +44,7 @@ class DouYinService
     public function callback(CallBackDTO $dto): array
     {
         // 数据入库
-
+        dd([CallBackDTO::getState(), CallBackDTO::getAuthCode()]);
         return [
             'state'     => $dto->getState(),
             'auth_code' => $dto->getAuthCode(),

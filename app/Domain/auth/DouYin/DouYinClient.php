@@ -6,7 +6,6 @@ use JsonException;
 use GuzzleHttp\RequestOptions;
 use App\Exceptions\ClientException;
 use Illuminate\Support\Facades\Redis;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Rice\Basic\Support\Abstracts\Guzzle\LaravelClient;
 
@@ -14,11 +13,11 @@ class DouYinClient extends LaravelClient
 {
     public function init(): void
     {
-        $this->options[RequestOptions::JSON] = [
+        $this->mergeOption(RequestOptions::JSON, [
             'app_id'    => DouYinEnum::APP_ID,
             'secret'    => DouYinEnum::SECRET,
             'auth_code' => DouYinEnum::AUTH_CODE,
-        ];
+        ]);
     }
 
     /**
@@ -77,17 +76,17 @@ class DouYinClient extends LaravelClient
      */
     private function handle(string $url): array
     {
-        $this->setCallback(function (?ResponseInterface $response) {
-            if (!$response) {
+        $this->setSuccessCondition(function () {
+            if (!$this->response) {
                 return false;
             }
 
-            $res = json_decode($response->getBody(), true);
+            $res = json_decode($this->response->getBody(), true);
 
             return 0 === $res['code'];
         });
 
-        $res = $this->client->post($url, $this->options);
+        $res = $this->client->post($url, $this->getOptions());
 
         $resArr = json_decode($res->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 

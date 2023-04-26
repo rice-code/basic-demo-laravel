@@ -14,11 +14,11 @@ class KuaiShouClient extends LaravelClient
 {
     public function init(): void
     {
-        $this->options[RequestOptions::JSON] = [
+        $this->mergeOption(RequestOptions::JSON, [
             'app_id'    => KuaiShouEnum::APP_ID,
             'secret'    => KuaiShouEnum::SECRET,
             'auth_code' => KuaiShouEnum::AUTH_CODE,
-        ];
+        ]);
     }
 
     /**
@@ -64,17 +64,17 @@ class KuaiShouClient extends LaravelClient
      */
     private function handle(string $url): array
     {
-        $this->setCallback(function (?ResponseInterface $response) {
-            if (!$response) {
+        $this->setSuccessCondition(function () {
+            if (!$this->response) {
                 return false;
             }
 
-            $res = json_decode($response->getBody(), true);
+            $res = json_decode($this->response->getBody(), true);
 
             return 'OK' === $res['message'];
         });
 
-        $res = $this->client->post($url, $this->options);
+        $res = $this->client->post($url, $this->getOptions());
 
         $resArr = json_decode($res->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
