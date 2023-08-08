@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\KuaiShou;
 
 use Illuminate\Http\Request;
-use App\Domain\auth\CallBackDTO;
+use App\Domain\Auth\CallBackDTO;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Exception\GuzzleException;
-use App\Domain\auth\KuaiShou\KuaiShouService;
+use App\Domain\Auth\KuaiShou\KuaiShouService;
 use Rice\Basic\Components\Exception\SupportException;
 use Rice\Basic\Components\Enum\ReturnCode\ClientErrorCode;
 

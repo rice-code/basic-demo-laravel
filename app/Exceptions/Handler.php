@@ -3,6 +3,10 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Http\Request;
+use Rice\Basic\Components\DTO\Response;
+use Illuminate\Validation\ValidationException;
+use Rice\Basic\Components\Enum\ReturnCode\ClientErrorCode;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -34,6 +38,16 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
+        });
+
+        $this->renderable(function (ValidationException $e, Request $request) {
+            return response()->json(
+                Response::buildFailure(
+                    ClientErrorCode::USER_REQUEST_PARAMETER_ERROR,
+                    $e->validator->errors()->first(),
+                    $e->validator->getMessageBag()->toArray()
+                )->toArray()
+            );
         });
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\auth\KuaiShou;
+namespace App\Domain\Auth\DouYin;
 
-use App\Domain\auth\Token;
-use App\Domain\auth\CallBackDTO;
+use App\Domain\Auth\Token;
+use App\Domain\Auth\CallBackDTO;
 use App\Exceptions\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 
-class KuaiShouService
+class DouYinService
 {
     /**
      * @throws GuzzleException
@@ -16,7 +16,7 @@ class KuaiShouService
      */
     public function accessToken(): Token
     {
-        $data  = KuaiShouClient::build()->accessToken();
+        $data  = DouYinClient::build()->accessToken();
         $token = new Token($data);
         if (($token->getAccessTokenExpiresIn() + $token->getTime()) < time()) {
             $data  = $this->refreshToken($token->getRefreshToken());
@@ -33,7 +33,7 @@ class KuaiShouService
      */
     protected function refreshToken($refreshToken): array
     {
-        return KuaiShouClient::build()->refreshToken($refreshToken);
+        return DouYinClient::build()->refreshToken($refreshToken);
     }
 
     /**
@@ -44,10 +44,11 @@ class KuaiShouService
     public function callback(CallBackDTO $dto): array
     {
         // 数据入库
-
         return [
-            'state'     => $dto->getState(),
-            'auth_code' => $dto->getAuthCode(),
+            'state'       => $dto->getState(),
+            'state_2'     => CallBackDTO::getState(),
+            'auth_code'   => $dto->getAuthCode(),
+            'auth_code_2' => CallBackDTO::getAuthCode(),
         ];
     }
 }

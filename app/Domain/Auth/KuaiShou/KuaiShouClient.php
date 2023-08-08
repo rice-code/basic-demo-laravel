@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\auth\KuaiShou;
+namespace App\Domain\Auth\KuaiShou;
 
 use JsonException;
 use GuzzleHttp\RequestOptions;

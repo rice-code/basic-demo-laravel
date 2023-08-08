@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\auth\DouYin;
+namespace App\Domain\Auth\DouYin;
 
 use JsonException;
 use GuzzleHttp\RequestOptions;

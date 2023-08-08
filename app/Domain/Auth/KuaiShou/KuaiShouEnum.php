@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\auth\KuaiShou;
+namespace App\Domain\Auth\KuaiShou;
 
 use Rice\Basic\Components\Enum\BaseEnum;
 

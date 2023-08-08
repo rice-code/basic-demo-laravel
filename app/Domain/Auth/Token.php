@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\auth;
+namespace App\Domain\Auth;
 
 use Rice\Basic\Components\Entity\BaseEntity;
 use Rice\Basic\Support\Traits\AutoFillProperties;
