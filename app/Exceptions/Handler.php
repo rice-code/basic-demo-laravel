@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Throwable;
 use Illuminate\Http\Request;
-use Rice\Basic\Components\DTO\Response;
+use Rice\Basic\Components\VO\Response;
 use Illuminate\Validation\ValidationException;
 use Rice\Basic\Components\Enum\ReturnCode\ClientErrorCode;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
